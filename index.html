@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Newspaper Layout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      background-color: black; /* Changed to black */
+      color: white; 
+      line-height: 1.6;
+      padding: 20px;
+    }
+    p {
+      margin: 0; /* Remove default margin if needed */
+      font-size: 20px; /* Adjust font size */
+   }
+    
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      background-color: rgb(0, 0, 0); /* Changed to maroon */
+      box-shadow: 0 4px 10px rgba(107, 1, 1, 0.637);
+      border-radius: 100px;
+      border: 5px solid maroon; /* Maroon border */
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #5c0909; /* Underline header */
+    }
+
+    .heading-1 {
+      font-size: 48px;
+      text-transform: uppercase;
+      color: rgb(78, 9, 9); /* Changed to white */
+      margin-bottom: 10px;
+    }
+    
+    .sub-heading {
+      font-size: 20px;
+      color: #ffffff; /* Light gray for date */
+      margin-bottom: 20px;
+    }
+    
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .featured-img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .latest-news {
+      background-color: #333; /* Darker background for news section */
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd; /* Border for separation */
+    }
+
+    .latest-news h3 {
+      color: white; /* Changed to white */
+      margin-bottom: 20px;
+    }
+
+    .list {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .list img {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    article {
+      background-color: rgb(0, 0, 0); /* Changed to maroon for articles */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    article > p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #ffffff; /* Light text for readability */
+    }
+
+    blockquote {
+      font-size: 20px;
+      padding: 20px;
+      margin: 40px 0;
+      background-color: rgb(63, 3, 3); /* Changed to black */
+      color: rgb(0, 0, 0); /* Changed to maroon */
+      border-left: 5px solid maroon; /* Maroon border */
+      font-style: italic;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap; /* Allows cards to wrap */
+      justify-content: space-between; /* Space between cards */
+      margin: 0 20px; /* Margin on left and right */
+  } 
+  
+    .card {
+      background-color: #500606; /* Card background color */
+      border: 6px solid #910909; /* Card border */
+      border-radius: 8px; /* Rounded corners */
+      padding: 16px; /* Inner padding */
+      width: calc(50% - 20px); /* Two cards per row */
+      margin: 10px 0; /* Margin only on top and bottom */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap; /* Allows cards to wrap to the next line if necessary */
+      justify-content: space-between; /* Space between cards */
+      margin: 0 20px; /* Margin on left and right */
+    }
+    /* Optional: To ensure even spacing, you can add media queries */
+    @media (max-width: 600px) {
+        .card {
+          width: calc(100% - 20px); /* Full width on small screens */
+      }
+    }
+    .card h4 {
+      color: rgb(0, 0, 0); /* Maroon color for card titles */
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: maroon; /* Maroon button */
+      color: white; /* Light text color */
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block; /* Make it a block element */
+      margin: 0 auto; /* Center it horizontally */
+      width: 150px; /* Set a width */
+    }
+
+    button:hover {
+      background-color: #800000; /* Darker maroon on hover */
+    }
+
+    @media (max-width : 950px) {
+      .featured {
+        grid-template-columns: 1fr;
+      }
+    }
+    img{
+      width:100%;
+      height: auto;
+    }
+    h4 {
+      margin-bottom: 8px; /* Space between heading and paragraph */
+      font-size: 24px; /* Adjust font size */
+    }
+    .content {
+      border: 1px solid #ccc; /* Border around the division */
+      padding: 16px; /* Padding inside the division */
+      margin: 10px 0; /* Margin outside the division */
+      border-radius: 8px; /* Rounded corners */
+    }
+    .cast-img {
+      width: 10%; /* Make cast images responsive */
+      height: auto; /* Maintain aspect ratio */
+      max-width: 80px; /* Maximum width for cast images */
+      border-radius: 8px; /* Rounded corners */
+      margin-bottom: 10px; /* Space below images */
+  }
+      h2 {
+        margin-bottom: 20px; /* Adjust this value for desired space below h2 */
+    }
+
+      h3 {
+        margin-top: 0; /* Reset top margin if necessary */
+    }
+      h6{
+        margin-top: 0; /* Reset top margin if necessary */
+        font-size: 40px;
+        color:#5c0909;
+      }
+      h5{
+        font-size: 40px;
+        color:#5c0909;
+      }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="heading-1">The Batman Part II
+        </h1>
+      <div class="sub-heading">
+        <p><span>2026</span></p>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="home">
+        <div class="left">
+          <img src="https://www.blackflix.com/wp-content/uploads/the-batman-part-ii-logo1.webp" alt="">
+
+          <h6 class="heading-2">
+            STORYLINE
+          </h6>
+        </div>
+
+        <div class="right">
+          <h3 class="heading-3"></h3>
+          <div class="lists">
+            <div class="list">
+            <ul>
+              <p>After witnessing the death of his parents at an early age and failing to help in anyway, 
+                Bruce Wayne cashes in on his father's fortune similar to Erik and Lyle Menedez. 
+                After blowing cash on partying and drugs young Wayne decides to dedicate his life to terrorizing the city he grew up in by treating every night like Halloween. 
+                In this marvelous sequel, Wayne is joined by Dua Lipa for the 2nd musical sequel in the Batman series. 
+                Sit back while you enjoy hearing the Batman serenade you to songs by Maxwell, Avant & Donnell Jones. Baby face has co-written this production with a soundtrack that can't miss.</p>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="right">
+        <h3 class="heading-3">TOP CASTS</h3>
+        <div class="lists">
+          <div class="list">
+            <img class="cast-img" src="https://m.media-amazon.com/images/M/MV5BNzk0MDQ5OTUxMV5BMl5BanBnXkFtZTcwMDM5ODk5Mg@@._V1_FMjpg_UX1000_.jpg" alt="">
+            <div class="cast-info">
+              <h4>Robert Pattinson</h4>
+              <p>Bruce Wayne, The Batman</p>
+          </div>
+          </div>
+
+          <div class="list">
+            <img class="cast-img" src="https://m.media-amazon.com/images/M/MV5BMTg4NzM5NDk0MV5BMl5BanBnXkFtZTcwNzAzMTUxNw@@._V1_.jpg" alt="">
+            <div class="cast-info">
+              <h4>Colin Farrell</h4>
+              <p>Oz Cobb, The Penguin</p>
+          </div>
+          </div>
+
+          <div class="list">
+            <img class="cast-img" src="https://m.media-amazon.com/images/M/MV5BMDU0MTUyMzktMDA3Yy00ZDhkLTkwMWEtOWQ3MzQwYmY3ZWI0XkEyXkFqcGc@._V1_.jpg" alt="">
+            <div class="cast-info">
+              <h4>Andy Serkis</h4>
+              <p>Alfred Pennyworth</p>
+          </div>
+          </div>
+
+          <div class="list">
+            <img class="cast-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSue9AEvzECt8vDm-z9PgoAhvAXJFbk6ZlbcQ&s" alt="">
+            <div class="cast-info">
+              <h4>Jeffrey Wright</h4>
+              <p>James Gordon</p>
+          </div>
+          </div>
+
+      <section class="interviews">
+        <div style="padding: 1px; margin-bottom: 20px;">
+          <h6>THE BATMAN - PART II: NEWS, CAST, STORY, & EVERYTHING WE KNOW</h6>
+          <img src="https://cdn.alza.cz/Foto/ImgGalery/Image/the-batman-cover_1.jpg" alt="">
+      </div>
+      <div style="padding: 1px; margin-bottom: 20px;">
+        <ul>
+            <p>
+              The Batman was released in March 2022, ushering in a new era for The Dark Knight — here’s everything to know about The Batman - Part II, 
+              including updates on The Joker’s possible inclusion and the spin-off shows. Directed by Matt Reeves from a screenplay by him and Peter Craig, 
+              The Batman joins Robert Pattinson's DC hero in his second year as Gotham City’s vigilante. The ending of The Batman definitely left scope for a sequel,
+              and the overwhelmingly positive reception to this latest iteration of the Caped Crusader made The Batman 2 feel almost guaranteed.
+            </p>
+        </ul>
+    </div>
+    
+    <div style="padding: 1px; margin-bottom: 20px;">
+        <ul>
+            <p>
+              While initially conceived to stand alone, the ending of The Batman set it up as the perfect movie to usher in a Batman-centered cinematic universe — including The Batman 2 as well as several possible spinoff shows. 
+              While The Batman 2 isn't on DC's immediate release slate, Matt Reeves is reportedly hard at work on a sequel. Here is everything to know about The Batman: Part II,
+              including who in the cast might return, the sequel’s release date, and if the Barry Keoghan iteration of the Joker will finally get more screen time.
+            </p>
+        </ul>
+    </div>
+  </div> 
+  <div class="interview">
+    <h6>THE BATMAN II: LATEST NEWS & UPDATES</h6>
+    <img src="https://images.bauerhosting.com/legacy/media/621c/fad9/92ff/e9ad/1afa/138c/batman-1.jpg?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80" alt="">
+    <div style="padding: 1px; margin-bottom: 20px;">
+        <ul>
+        <p>
+          Recent updates on The Batman - Part II from September 2024 interviews highlight its connections to the Penguin spinoff show. 
+          Director Matt Reeves described The Penguin as an "entrée into the next movie," set in winter, potentially with a Christmas backdrop for the sequel. 
+          Reeves and producer Dylan Clark hinted at Penguin's evolution,
+          suggesting he will be a significantly changed character when he returns in the sequel..</p>
+        </p>
+      </ul>
+    </div>  
+     <div class="interview">
+      <div style="padding: 1px; margin-bottom: 20px;">
+          <ul>
+          <p>
+            Additionally, screenwriter Mattson Tomlin revealed that filming is set to begin in 2025,
+            aligning with the projected 2026 release date. Despite earlier concerns over a lack of updates,
+            this news is promising for fans.</p>
+          </p>
+        </ul>
+      </div>  
+      <div style="padding: 1px; margin-bottom: 20px;">
+        <ul>
+        <p>
+           There have been various rumors about the sequel, many of which DC co-CEO James Gunn has debunked. 
+           hile details on the central villain and supporting cast remain unclear, 
+           audiences shouldn't expect a trailer until late 2024. However, 
+           casting news and teasers are likely to emerge in the meantime to build anticipation.</p>
+        </p>
+      </ul>
+    </div>
+    <h6>THE BATMAN II IS CONFIRMED</h6>
+    <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/04/the-batman.jpg" alt="">
+      <div style="padding: 1px; margin-bottom: 20px;">
+          <ul>
+          <p>
+            Following the commercial and critical success of The Batman, Warner Bros. announced a sequel and streaming series spinning out of The Batman — one (now-canceled) series about the Gotham City Police Department, 
+            a potential Arkham Asylum-based show, a series based on The Penguin, and possibly even one for Zoë Kravtiz' Catwoman. While the status of these ambitious TV projects is currently a little murky other than The Penguin, 
+            which is set to release in September 2024, The Batman - Part II very much isn't, as The Batman 2 has been confirmed.</p>
+          </p>
+        </ul>
+      </div>  
+      <div style="padding: 1px; margin-bottom: 20px;">
+        <ul>
+        <p>
+            The recent shake-ups at the newly-merged Warner Bros Discovery, including the appointment of James Gunn and Peter Safran as heads of a new on-screen DC Universe, 
+            have put some future projects in doubt, but Gunn has confirmed that Reeves will be writing and directing two more The Batman movies, resulting in a trilogy.
+            This news was met incredibly well by most — especially since it comes at a time when many popular DC screen-based ventures like the Arrowverse have concluded, 
+            leaving audiences more hungry than ever for new installments.</p>
+        </p>
+      </ul>
+    </div>  
+    <h6>THE BATMAN II PRODUCTION STATUS</h6>
+    <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2022/02/Why-Robert-Pattinson-is-the-Batman.jpg" alt="">
+    <div style="padding: 1px; margin-bottom: 20px;">
+        <ul>
+        <p>
+          
+            In August 2024, screenwriter Mattson Tomlin announced that filming for The Batman - Part II is set to begin in 2025. Tomlin, who is co-writing the script with creator Matt Reeves,
+            indicated that the script is likely nearing completion, though he did not confirm it was finished.
+            This suggests a smooth transition into filming ahead of the movie's release date.</p>
+        </p>
+      </ul>
+    </div>  
+    <div style="padding: 1px; margin-bottom: 20px;">
+      <ul>
+      <p>
+            Previously, in June 2024, there were concerns about the script's progress due to a nine-month hiatus without updates. 
+            DCU co-CEO James Gunn noted that the script's readiness depends on Reeves,
+            emphasizing that quality is prioritized over a specific timeline. This approach aims to ensure the sequel meets the high standards of the original film.</p>
+      </p>
+    </ul>
+  </div>  
+  <div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p>
+            Back in September 2023, Warner Bros. Discovery prioritized completing the script following the end of the Writers Guild strikes. 
+            Although production delays were possible due to these strikes, the movie's release was postponed to 2026, allowing more time for a thorough production process, 
+            which is crucial for the film's detective elements.
+    </p>
+    </p>
+  </ul>
+</div>
+<h6>THE BATMAN II RELEASE DATE</h6>
+<img src="https://www.videogameschronicle.com/files/2023/10/batman.jpg" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p>  
+            The Batman experienced multiple delays due to the global pandemic, having begun filming just before lockdown and resuming production later in 2020. 
+            Initially set for a summer 2021 release, the sequel, The Batman - Part II, 
+            was later scheduled for October 3, 2025, but is now pushed to October 2, 2026, following a March 2024 update.</p>
+    </p>
+  </ul>
+</div>    
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p> 
+            This delay is attributed to disruptions caused by the SAG-AFTRA and WGA strikes, affecting several superhero projects. 
+            The extra time aims to ensure the sequel's quality, especially with upcoming franchise spinoffs in the interim. The new release date places The Batman - Part II after Avengers 5, 
+            potentially giving it a prime spot at the box office. However, the DCU's next Batman film, The Brave and the Bold, is also expected in 2026, meaning two Batman films may release in close succession. 
+            While this could complicate things, it may also signal a shift in DC's approach to competing with the MCU.</p>
+  </p>
+</ul>
+</div>  
+<h6>THE BATMAN II CAST: WHO COULD RETURN & WHO MIGHT DEBUT?</h6>
+<img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/05/Batman-Pattinson-suit.jpg" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p> 
+          So far, two cast members have been confirmed to return for The Batman - Part II: Robert Pattinson as Bruce Wayne and Colin Farrell as the Penguin. Farrell's return was announced during the 2024 San Diego Comic-Con, 
+          indicating that the events of the upcoming The Penguin series will influence the sequel.
+          Given the tense relationship established between Batman and the Penguin in the first film, their dynamic will be intriguing, especially as the Penguin gains power.</p>
+    </p>
+  </ul>
+</div>  
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p>
+          It's likely that Zoë Kravitz (Catwoman), Jeffrey Wright (Jim Gordon), and Andy Serkis (Alfred) will also return, 
+          along with Barry Keoghan, who may have a larger role as the Joker. Additionally, Paul Dano's Riddler,
+          who survived the first film and has ties to the Joker, could become a significant threat in the trilogy.</p>
+  </p>
+</ul>
+</div>
+<h6>THE BATMAN II STORY: HOW THE BATMAN'S ENDING SETS UP A SEQUEL</h6>
+<img src="https://deadline.com/wp-content/uploads/2022/03/batman-19-1-e1647100136844.jpeg" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p>
+      
+          The Batman concludes with a scene where The Riddler befriends the Joker in Arkham Asylum, suggesting a possible alliance for The Batman - Part II. 
+          The Joker's riddle hints at the emergence of the Court of Owls, a criminal organization comprising Gotham's elite.
+          Pattinson’s Batman reflects in a voiceover that Gotham will attempt to rebuild,
+          but chaos and corruption will peak following Carmine Falcone's death.</p>
+    </p>
+  </ul>
+</div>  
+<h6>THE BATMAN II DOES NOT YET HAVE A TRAILER</h6>
+<img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/01/the-batman-robert-pattinson-1.jpg" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p>
+          While The Batman - Part II is confirmed, a trailer won't be available soon since the sequel is still in the early stages of development, 
+          lacking both footage and a finalized story. Other DC films, like Joker: Folie à Deux, have released teaser visuals shortly after announcements,
+          so it's possible The Batman - Part II could receive similar promotion in the future as more details emerge.</p>
+    </p>
+  </ul>
+</div>  
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p>
+          With The Penguin set to release between the two films, it may make sense to debut a trailer for The Batman - Part II after the spinoff concludes, 
+          possibly aligning with its finale. Since the sequel is scheduled for 2026, there is ample time for a trailer release, allowing audiences to engage with the upcoming spinoff series in the meantime.
+          Ultimately, the strategy may lean toward waiting to generate excitement closer to the film's actual release.</p>
+  </p>
+</ul>
+</div>  
+<h6>IS THE JOKER IN THE BATMAN II? LIKELY THE BATMAN - PART II VILLAINS EXPLAINED </h6>
+<img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/201512/batman-and-joker---storysize-and-facebook_647_120415015819.jpg?VersionId=eixk6SFtzP.SmNBPZzBId.23wbti_OqM" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p>
+          Given the Joker's appearance in The Batman, it's expected he will have a significant role in The Batman - Part II. 
+          A deleted scene shows Batman visiting the Joker in Arkham Asylum to inquire about the Riddler, indicating the Joker's involvement is likely to expand. 
+          Director Matt Reeves seems to be withholding details about the character,
+          potentially reserving a major confrontation for the franchise's finale.</p>
+    </p>
+  </ul>
+</div> 
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p>
+          Another possible antagonist for the sequel is the Court of Owls, which fits the film's themes of organized crime and corruption among Gotham's elite.
+          With Gotham's situation worsening after the Riddler's actions, the Court could emerge as a central threat in The Batman - Part II. 
+          However, any details regarding the villain are still speculative,
+          and the film is expected to provide a fresh take, much like Paul Dano's reinterpretation of the Riddler.</p>
+  </p>
+</ul>
+</div> 
+<h6>EVERYTHING WE KNOW ABOUT THE BATMAN SPIN-OFF SHOWS</h6>
+<img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2024/02/barry-keoghan-s-joker-takes-on-robert-pattinson-s-dark-knight-in-the-batman-part-ii-fan-trailer.jpg" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p>
+          Warner Bros. has announced several spinoff shows set in The Batman universe. Initially, a series focused on the Gotham Police Department (Gotham P.D.) was planned for HBO Max but has been indefinitely put on hold due to internal disagreements. This was supposed to be replaced by an untitled Arkham Asylum series, which could have provided a proper introduction for the Joker. 
+          However, this series was also reportedly canceled in July 2024, although the possibility of a future project set in Arkham remains open.</p>
+    </p>
+  </ul>
+</div>
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p>
+          The most recent confirmed spinoff is a Penguin-focused show, set to debut in September 2024. 
+          This series will explore Oz Cobb's rise to power and the implications of Carmine Falcone's death on Gotham's criminal underworld, 
+          while connecting the timelines of the first and second films.
+  </p>
+  </p>
+</ul>
+</div>
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p>
+          While a Catwoman spinoff has not been confirmed, director Matt Reeves has expressed interest in developing one, 
+          especially given the success of The Batman and Zoë Kravitz's performance. Additionally, reports indicate Reeves is meeting with writers and directors to explore more series and movies featuring characters like Scarecrow, Clayface, and Professor Pyg. 
+          However, given the uncertainties within the DC Universe and Warner-Discovery, 
+          plans may change. Regardless, all these shows are expected to interconnect with The Batman - Part II.
+  </p>
+  </p>
+</ul>
+</div>
+<h6>WILL THE BATMAN II WILL BE PART OF THE NEW DC UNIVERSE?</h6>
+<img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2024/05/batman-swings-through-gotham-city-in-dc-comics-cover.jpg" alt="">
+<div style="padding: 1px; margin-bottom: 20px;">
+    <ul>
+    <p> 
+          With Warner Bros. moving away from the Zack Snyder-created version of its DC heroes, some fans speculated that The Batman could launch a new universe. However, 
+          in January 2023, DC Studios co-head James Gunn confirmed that The Batman - Part II and related projects will remain separate from the broader DC Universe.</p>
+        </p>
+  </ul>
+</div>    
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p> 
+          These projects, including The Batman 2, will fall under the DC Elseworlds banner, which denotes alternate universes outside the main continuity. 
+          This decision aligns well with the darker, grittier tone of The Batman, 
+          distinguishing it from the more fantastical elements of the upcoming DC Universe releases.</p>
+      </p>
+</ul>
+</div>  
+<div style="padding: 1px; margin-bottom: 20px;">
+  <ul>
+  <p> 
+          The new DC Universe will introduce its own version of Batman in Batman: The Brave and the Bold, which is expected to feature a lighter tone and the return of Robin to the big screen. 
+          This will create a parallel to Reeves' darker The Batman universe. It remains uncertain how audiences will react to having two different Batman series simultaneously, but for now, 
+          The Batman - Part II will have the creative freedom to explore its darker narrative without constraints.</p>
+      </p>
+</ul>
+</div>  
+    <blockquote>
+      <ul>
+        "I wish I could say I'm making a difference, but I don't know. Murder, robberies, assault. Two years later, they're all up. 
+        And now this. The city's eating itself. Maybe it's beyond saving. But I have to try."
+        ―Batman
+      </ul>
+    </blockquote>
+</div>
+    <blockquote>
+    <ul>
+      In "The Batman," Bruce Wayne (Robert Pattinson) has been fighting crime for two years, instilling fear in Gotham's criminals while navigating a corrupt city alongside allies Alfred Pennyworth (Andy Serkis) and Lt. James Gordon (Jeffrey Wright). 
+      When a killer targets Gotham's elite with a series of cryptic clues, Batman delves into the criminal underworld, encountering characters like Selina Kyle/Catwoman (Zoë Kravitz), Oswald Cobb/The Penguin (Colin Farrell), Carmine Falcone (John Turturro), 
+      and Edward Nashton/The Riddler (Paul Dano). As he unravels the conspiracy, he must forge new alliances to confront the deep-rooted corruption in Gotham.
+    </ul>
+    </blockquote>
+    <div class="card-container">
+      <div class="card-container">
+        <div class="card">
+            <h4 class="heading-4">THE BATMAN II RUMORED VILLAIN</h4>
+            <img src="https://i.ytimg.com/vi/Ys5Zi5sHjzw/maxresdefault.jpg" alt="">
+            <p>The article discusses the potential inclusion of Clayface as the villain in The Batman - Part II. Concerns are raised about how Clayface's fantastical elements could conflict with the realistic tone established in the first film, which featured a grounded portrayal of The Riddler.</p>
+        </div>
+        <div class="card">
+            <h4 class="heading-4">CHALLENGES WITH CLAYFACE</h4>
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/04/dc-s-clayface-gets-a-horrific-new-look-in-batman-part-ii-fan-art.jpg" alt="">
+            <p>While Clayface is an iconic villain, adapting him for a serious tone poses challenges. The article suggests ways to make Clayface work, such as drawing on his original portrayal as an actor turned villain, or exploring horror elements to create a more menacing character.</p>
+        </div>
+        <div class="card">
+            <h4 class="heading-4">SCRIPT AND FUTURE UPDATES</h4>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8z4Chn-a103WcE1D-xTWP2bZSA1RAoXphhg&s" alt="">
+            <p>The script for The Batman - Part II is still in progress, with updates expected as production resumes. Despite delays, Warner Bros. aims to fast-track the project post-WGA strike, but the completion of the script is necessary before solid details emerge.</p>
+        </div>
+        <div class="card">
+            <h4 class="heading-4">ALTERNATIVE VILLAINS</h4>
+            <img src="https://i.ytimg.com/vi/uV0u7Ll4b98/maxresdefault.jpg" alt="">
+            <p>Other potential villains are suggested, including Professor Pyg, Scarecrow, and Hush. Each character could fit into the grounded narrative and explore deeper psychological themes relevant to Batman's character.</p>
+        </div>
+    </div>
+    <button onclick="window.location.href='batman.html'" style="margin-top: 10px;">Back to Main Page</button>
+    <button onclick="window.location.href='batman3.html'" style="margin-top: 10px;">Go to Page 3</button>
+</body>
+</html>
